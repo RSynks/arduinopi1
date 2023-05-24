@@ -1,19 +1,20 @@
-#define pot A0
 #include "Servo.h"
 
-Servo servo1;
+Servo servo1; //laranja portas digitais
+
 
 void setup() {
   Serial.begin(9600);
-  servo1.attach(7);
+  servo1.attach(13);
 }
 
 void loop() {
+  int angulo = Serial.parseInt();
+  Serial.available();
+  Serial.print("digite valor do angulo: ");
+  Serial.println(angulo);
+  servo1.write(angulo);
+  delay(1500);
 
-  int potvalor = analogRead(pot);
-  Serial.print("valor do potenciometro = ");
-  Serial.println(potvalor);
-  potvalor = map(potvalor, 0, 1023, 0, 180);
-  servo1.write(potvalor);
-  delay(250);
+  angulo = 0;
 }
