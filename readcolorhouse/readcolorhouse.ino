@@ -58,14 +58,14 @@ void loop() {
   }
 
   else if((pulseR > 54) && (pulseR < 68) &&
-    (pulseG > 115 ) && (pulseG < 123 ) &&
-    (pulseB > 115) && (pulseB < 123 ) &&
+    (pulseG > 111 ) && (pulseG < 123 ) &&
+    (pulseB > 111) && (pulseB < 123 ) &&
     (pulseW < 100)){
     Serial.println("LARANJA");
     
   }
 
-  else if((pulseR > 61) && (pulseR < 70) &&
+  else if((pulseR > 60) && (pulseR < 70) &&
     (pulseG > 84 ) && (pulseG < 95 ) &&
     (pulseB > 84) && (pulseB < 95 ) &&
     (pulseW < 100)){
@@ -82,34 +82,26 @@ void loop() {
   }
 
   else if((pulseR > 140) && (pulseR < 170) &&
-    (pulseG > 70 ) && (pulseG < 100 ) &&
-    (pulseB > 70) && (pulseB < 100 ) &&
+    (pulseG > 70) && (pulseG < 115) &&
+    (pulseB > 70) && (pulseB < 115) &&
     (pulseW < 100)){
     Serial.println("AZUL ESCURO");
     
   }
 
-  else if((pulseR > 112) && (pulseR < 126) &&
-    (pulseG > 49) && (pulseG < 60) &&
-    (pulseB > 49) && (pulseB < 60) &&
+  else if((pulseR > 112) && (pulseR < 131) &&
+    (pulseG > 49) && (pulseG < 63) &&
+    (pulseB > 49) && (pulseB < 63) &&
     (pulseW < 100)){
     Serial.println("AZUL MARINHO");
     
   }
 
-  else if((pulseR > 118) && (pulseR < 130) &&
-    (pulseG > 68) && (pulseG < 80) &&
-    (pulseB > 68) && (pulseB < 80) &&
+  else if((pulseR > 111) && (pulseR < 130) &&
+    (pulseG > 61) && (pulseG < 80) &&
+    (pulseB > 61) && (pulseB < 80) &&
     (pulseW < 100)){
     Serial.println("TURQUESA");
-    
-  }
-
-  else if((pulseR > 140) && (pulseR < 160) &&
-    (pulseG > 95 ) && (pulseG < 115 ) &&
-    (pulseB > 95) && (pulseB < 115 ) &&
-    (pulseW < 100)){
-    Serial.println("AZUL ESCURO");
     
   }
 
@@ -154,8 +146,8 @@ void loop() {
   }
 
   else if((pulseR > 164) && (pulseR < 175) &&
-    (pulseG > 143 ) && (pulseG < 154 ) &&
-    (pulseB > 143) && (pulseB < 154 ) &&
+    (pulseG > 140 ) && (pulseG < 154 ) &&
+    (pulseB > 140) && (pulseB < 154 ) &&
     (pulseW < 100)){
     Serial.println("PRETO");
     
@@ -173,7 +165,7 @@ void loop() {
     Serial.println("Desculpe, nao conseguimos identificar a cor....");
   }
   Serial.println();
-  delay(1000);
+  delay(3000);
 }
 
 void detectaCor(){
