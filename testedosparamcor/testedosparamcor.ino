@@ -31,7 +31,7 @@ void setup() {
 }
 
 void loop() {
-  
+ 
   detectaCor(); //inicia a funcao la em baixo fora do loop
 
   //mostra os valores dos pulso das cores no serial monitor
@@ -49,19 +49,56 @@ void loop() {
   Serial.println();
 
   //verifica se a cor vermelha foi detectada
-  if((pulseR < pulseB) && (pulseR < pulseG) && (pulseW < 100)){
-    Serial.println("vermelho");
+  if((pulseR > 30) && (pulseR < 100) &&
+    (pulseG > 60 ) && (pulseG < 140 ) &&
+    (pulseB > 60) && (pulseB < 140 ) &&
+    (pulseW < 100)){
+    Serial.println("VERMELHO");
     //aqui eu poderia botar uma funcao do que deve acontecer se vermelho
   }
 
-  else if((pulseB<pulseR) && (pulseB<pulseG) && (pulseW<100)){
-    Serial.println("azul");
-    //aqui poderia inserir funcao do que acontecer se azul
+  else if((pulseR > 140) && (pulseR < 170) &&
+    (pulseG > 70 ) && (pulseG < 100 ) &&
+    (pulseB > 70) && (pulseB < 100 ) &&
+    (pulseW < 100)){
+    Serial.println("AZUL ESCURO");
+     //aqui poderia inserir funcao do que acontecer se azul
   }
 
-  else if((pulseG<pulseR) && (pulseG < pulseB) && (pulseW <100)){
-    Serial.println("verde");
+  else if((pulseR > 100) && (pulseR < 120) &&
+    (pulseG > 110 ) && (pulseG < 135 ) &&
+    (pulseB > 110) && (pulseB < 135 ) &&
+    (pulseW < 100)){
+    Serial.println("VERDE CLARO");
     //aqui poderia inserir funcao do que deve acontecer se verde
+  }
+
+  else if((pulseR > 120) && (pulseR < 150) &&
+    (pulseG > 90 ) && (pulseG < 120 ) &&
+    (pulseB > 90) && (pulseB < 120 ) &&
+    (pulseW < 100)){
+    Serial.println("VERDE ESCURO");
+    //aqui poderia inserir funcao do que deve acontecer se verde
+  }
+
+  else if((pulseR > 10) && (pulseR < 40) &&
+    (pulseG > 10 ) && (pulseG < 40 ) &&
+    (pulseB > 10) && (pulseB < 40 ) &&
+    (pulseW < 100)){
+    Serial.println("BRANCO");
+    //aqui poderia inserir funcao do que deve acontecer se verde
+  }  
+
+  else if((pulseR > 145) && (pulseR < 160) &&
+    (pulseG > 120 ) && (pulseG < 140 ) &&
+    (pulseB > 120) && (pulseB < 140 ) &&
+    (pulseW < 100)){
+    Serial.println("PRETO");
+    //aqui poderia inserir funcao do que deve acontecer se verde
+  }
+    
+  else{
+    Serial.println("Leitura vazia....");
   }
   Serial.println();
   delay(1000);

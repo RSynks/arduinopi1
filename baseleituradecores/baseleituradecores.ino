@@ -1,10 +1,9 @@
-
-#define pinLED 8 //OE, GND no GND, VCC no positivo
-#define pinS0 9 //S0
-#define pinS1 10 //S1
-#define pinOUT 11 //OUT
-#define pinS3 12 //S3
-#define pinS2 13 //S2
+#define pinLED 3 //OE, GND no GND, VCC no positivo; old 8
+#define pinS0 5 //S0; old 9
+#define pinS1 6 //S1; old 10
+#define pinOUT 9 //OUT; old 11
+#define pinS3 10 //S3; old 12
+#define pinS2 11 //S2; old 13
 
 void detectaCor();
 int pulseR = 0,
@@ -35,6 +34,7 @@ digitalWrite(pinLED, HIGH); //liga LED
 void loop() {
 
 detectaCor(); //puxa/inicia a funcao da leitura de cor
+delay(2000);
 Serial.print("vermelho: ");
 Serial.println(pulseR);
 
@@ -49,20 +49,28 @@ Serial.print(pulseW);
 Serial.println();
 
 //inicia-se a leitura de cor
-if((xxx<pulseR<xxx)&&(xxx<pulseG<xxx)&&(xxx<pulseB<xxx)&&(pulseW<100)){
-  Serial.println("VERMELHO");
-  
-}
 
-else if((xxx<pulseR<xxx)&&(xxx<pulseG<xxx)&&(xxx<pulseB<xxx)&&(pulseW<100)){
+
+if((100<pulseR<120)and(90<pulseG<120)and(100<pulseB<130)and(pulseW<100)){
   Serial.println("VERDE");
   
 }
 
-else if((xxx<pulseR<xxx)&&(xxx<pulseG<xxx)&&(xxx<pulseB<xxx)&&(pulseW<100)){
+else if((140<pulseR<170)and(130<pulseG<160)and(60<pulseB<100)and(pulseW<100)){
   Serial.println("AZUL");
   
 }
+
+else if ((60<pulseR<100)and(150<pulseG<180)and(110<pulseB<140)and(pulseW<100)){
+  Serial.println("VERMELHO");
+  
+}
+
+else if((pulseR>150)and(pulseG>190)and(pulseB>140)and(pulseW<100)){
+  Serial.println("leitura vazia");
+  
+}
+
 
 else{
   Serial.println("OUTRA COR");
@@ -79,7 +87,8 @@ void detectaCor(){
   pulseR = pulseIn(pinOUT, digitalRead(pinOUT) == HIGH ? LOW : HIGH);
 
   //sem filtro
-  digitalWrite(pinS2,HIGH);
+  digitalWrite(pinS2, HIGH);
+  digitalWrite(pinS3, LOW);
   pulseW = pulseIn(pinOUT, digitalRead(pinOUT) == HIGH ? LOW : HIGH);
 
   //detectando azul
@@ -88,6 +97,10 @@ void detectaCor(){
   pulseB = pulseIn(pinOUT, digitalRead(pinOUT) == HIGH ? LOW : HIGH);
 
   //detectando verde
+  digitalWrite(pinS2, HIGH);
+  digitalWrite(pinS3, HIGH);
   pulseG = pulseIn(pinOUT, digitalRead(pinOUT) == HIGH ? LOW : HIGH);
+
+  
 
 }
