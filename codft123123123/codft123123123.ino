@@ -1,4 +1,4 @@
-#include <Servo.h>
+#include <VarSpeedServo.h>
 
 #define pinLED 3 //OE, GND no GND, VCC no positivo; old 8
 #define pinS0 5 //S0; old 9
@@ -14,9 +14,9 @@ int pulseR = 0,
     pulseB = 0,
     pulseW = 0;
 
-Servo servo1,
-      servo2,
-      servo3;
+VarSpeedServo servo1,
+              servo2,
+              servo3;
 
 int open = 90,
     close = 0,
@@ -47,18 +47,18 @@ void loop() {
   int i1=0,
       i2=0;
 
-  servo1.write(close);
-  servo2.write(close);
+  servo1.slowmove(close,50);
+  servo2.slowmove(close,50);
   Serial.println("fechou fila e entrega");
   Serial.println("valor de i1 e i2:");
   Serial.println(i1);
   Serial.println(i2);
   delay(1000);
 
-  servo1.write(open);
+  servo1.slowmove(open,50);
   Serial.println("abriu fila");
   delay(1000);
-  servo1.write(close);
+  servo1.slowmove(close,50);
   Serial.println("fechou fila");
   delay(1000);
 
@@ -85,7 +85,7 @@ void loop() {
     (pulseB > 118) && (pulseB < 141) &&
     (pulseW < 100)){
     Serial.println("VERMELHO");
-    servo3.write(0);
+    servo3.slowmove(0,30);
     break;
   }
 
@@ -94,7 +94,7 @@ void loop() {
     (pulseB > 111) && (pulseB < 128) &&
     (pulseW < 100)){
     Serial.println("LARANJA");
-    servo3.write(0);
+    servo3.slowmove(0,30);
     break;
   }
 
@@ -103,7 +103,7 @@ void loop() {
     (pulseB > 84) && (pulseB < 99) &&
     (pulseW < 100)){
     Serial.println("ROSA");
-    servo3.write(180);
+    servo3.slowmove(180,30);
     break;
   }
 
@@ -112,7 +112,7 @@ void loop() {
     (pulseB > 98) && (pulseB < 120) &&
     (pulseW < 100)){
     Serial.println("AMARELO");
-    servo3.write(30);
+    servo3.slowmove(30,30);
     break;
   }
 
@@ -121,7 +121,7 @@ void loop() {
     (pulseB > 62) && (pulseB < 75 ) &&
     (pulseW < 100)){
     Serial.println("AMARELO CLARO");
-    servo3.write(30);
+    servo3.slowmove(30,30);
     break;
   }
 
@@ -130,7 +130,7 @@ void loop() {
     (pulseB > 70) && (pulseB < 115) &&
     (pulseW < 100)){
     Serial.println("AZUL ESCURO");
-    servo3.write(60);
+    servo3.slowmove(60,30);
     break;
   }
 
@@ -139,7 +139,7 @@ void loop() {
     (pulseB > 49) && (pulseB < 63) &&
     (pulseW < 100)){
     Serial.println("AZUL MARINHO");
-    servo3.write(60);
+    servo3.slowmove(60,30);
     break;
   }
 
@@ -148,7 +148,7 @@ void loop() {
     (pulseB > 61) && (pulseB < 80) &&
     (pulseW < 100)){
     Serial.println("TURQUESA");
-    servo3.write(60);
+    servo3.slowmove(60,30);
     break;
   }
 
@@ -157,7 +157,7 @@ void loop() {
     (pulseB > 110) && (pulseB < 135 ) &&
     (pulseW < 100)){
     Serial.println("VERDE CLARO");
-    servo3.write(90);
+    servo3.slowmove(90,30);
     break;
   }
 
@@ -166,7 +166,7 @@ void loop() {
     (pulseB > 110) && (pulseB < 142) &&
     (pulseW < 100)){
     Serial.println("VERDE ESCURO");
-    servo3.write(90);
+    servo3.slowmove(90,30);
     break;
   }
 
@@ -175,7 +175,7 @@ void loop() {
     (pulseB < 50) &&
     (pulseW < 100)){
     Serial.println("BRANCO");
-    servo3.write(180);
+    servo3.slowmove(180,30);
     break;
     
   } 
@@ -186,7 +186,7 @@ void loop() {
     (pulseB > 102) && (pulseB < 120) &&
     (pulseW < 100)){
     Serial.println("ROXO");
-    servo3.write(180);
+    servo3.slowmove(180,30);
     break;
   }
 
@@ -196,7 +196,7 @@ void loop() {
     (pulseB > 130) && (pulseB < 160) &&
     (pulseW < 100)){
     Serial.println("PRETO");
-    servo3.write(180);
+    servo3.slowmove(180,30);
     break;
   }
 
@@ -221,7 +221,7 @@ void loop() {
       Serial.println("checamos e realmente a cor e diferente, moveu escorregador");
       Serial.println("valor de i2: ");
       Serial.println(i2);
-      servo3.write(180);
+      servo3.slowmove(180,30);
       break;
     }
     else{
@@ -241,15 +241,14 @@ void loop() {
   Serial.println("");
 
 
-  servo2.write(open);
+  servo2.slowmove(open,50);
   Serial.println("abriu entrega");
   delay(1000);
-
-  servo2.write(open);
+  
   Serial.println("fechou entrega");
   Serial.println("vamos recomecar!!");
   Serial.println("");
-  delay(10000);
+  delay(5000);
 
 
 }
