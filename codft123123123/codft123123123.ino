@@ -44,15 +44,26 @@ void setup() {
 
 void loop() {
   
+  int i1=0,
+      i2=0;
+
   servo1.write(close);
   servo2.write(close);
+  Serial.println("fechou fila e entrega");
+  Serial.println("valor de i1 e i2:");
+  Serial.println(i1);
+  Serial.println(i2);
   delay(1000);
 
   servo1.write(open);
+  Serial.println("abriu fila");
   delay(1000);
   servo1.write(close);
+  Serial.println("fechou fila");
   delay(1000);
 
+ while((i1<=5) or (i2<=5)){ 
+  
   detectaCor(); //inicia a funcao la em baixo fora do loop
 
   //mostra os valores dos pulso das cores no serial monitor
@@ -66,16 +77,16 @@ void loop() {
   Serial.print(pulseB);
 
   Serial.print(" branco: ");
-  Serial.print("pulseW");
+  Serial.print(pulseW);
   Serial.println();
 
-  //verifica se a cor vermelha foi detectada
   if((pulseR > 62) && (pulseR < 90) &&
     (pulseG > 118) && (pulseG < 141) &&
     (pulseB > 118) && (pulseB < 141) &&
     (pulseW < 100)){
     Serial.println("VERMELHO");
     servo3.write(0);
+    break;
   }
 
   else if((pulseR > 58) && (pulseR < 68) &&
@@ -84,6 +95,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("LARANJA");
     servo3.write(0);
+    break;
   }
 
   else if((pulseR > 60) && (pulseR < 75) &&
@@ -92,6 +104,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("ROSA");
     servo3.write(180);
+    break;
   }
 
   else if((pulseR > 51) && (pulseR < 70) &&
@@ -100,6 +113,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("AMARELO");
     servo3.write(30);
+    break;
   }
 
   else if((pulseR > 39) && (pulseR < 55) &&
@@ -108,6 +122,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("AMARELO CLARO");
     servo3.write(30);
+    break;
   }
 
   else if((pulseR > 140) && (pulseR < 170) &&
@@ -116,6 +131,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("AZUL ESCURO");
     servo3.write(60);
+    break;
   }
 
   else if((pulseR > 112) && (pulseR < 131) &&
@@ -124,6 +140,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("AZUL MARINHO");
     servo3.write(60);
+    break;
   }
 
   else if((pulseR > 111) && (pulseR < 130) &&
@@ -132,6 +149,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("TURQUESA");
     servo3.write(60);
+    break;
   }
 
   else if((pulseR > 100) && (pulseR < 120) &&
@@ -140,6 +158,7 @@ void loop() {
     (pulseW < 100)){
     Serial.println("VERDE CLARO");
     servo3.write(90);
+    break;
   }
 
   else if((pulseR > 130) && (pulseR < 170) &&
@@ -148,46 +167,91 @@ void loop() {
     (pulseW < 100)){
     Serial.println("VERDE ESCURO");
     servo3.write(90);
+    break;
   }
 
-  else if(pulseR < 50) &&
+  else if((pulseR < 50) &&
     (pulseG < 50) &&
     (pulseB < 50) &&
     (pulseW < 100)){
     Serial.println("BRANCO");
     servo3.write(180);
+    break;
+    
   } 
 
+  //leitura de cor roxa
   else if((pulseR > 115) && (pulseR < 130) &&
     (pulseG > 102) && (pulseG < 120) &&
     (pulseB > 102) && (pulseB < 120) &&
     (pulseW < 100)){
     Serial.println("ROXO");
     servo3.write(180);
+    break;
   }
 
+  //leitura de cor preta
   else if((pulseR > 150) && (pulseR < 183) &&
     (pulseG > 130 ) && (pulseG < 160) &&
     (pulseB > 130) && (pulseB < 160) &&
     (pulseW < 100)){
     Serial.println("PRETO");
     servo3.write(180);
+    break;
   }
 
+  //leitura se a fila está vazia
   else if((pulseR > 170) &&
     (pulseG > 150) &&
     (pulseB > 150) &&
     (pulseW < 100)){
     Serial.println("Fila de leitura vazia...");
-    i=i+1
+    i1=i1+1;
+    Serial.println("valor de i1:");
+    Serial.println(i1);
+    if(i1>=5){
+      break;
+    }
   }
     
+  //verificação se a cor está ou nao cadastrada  
   else{
     Serial.println("Desculpe, nao conseguimos identificar a cor....");
-    servo3.write(180);
+    if(i2>=5){
+      Serial.println("checamos e realmente a cor e diferente, moveu escorregador");
+      Serial.println("valor de i2: ");
+      Serial.println(i2);
+      servo3.write(180);
+      break;
+    }
+    else{
+      i2=i2+1;
+      Serial.println("nao identificamos, vamos checar novamente");
+      Serial.println("valor de i2: ");
+      Serial.println(i2);
+      
+    }
   }
+  delay(5000);
+ }
   Serial.println();
   delay(1000);
+  Serial.println("encerrou checagem");
+  Serial.println("vamos dar sequencia");
+  Serial.println("");
+
+
+  servo2.write(open);
+  Serial.println("abriu entrega");
+  delay(1000);
+
+  servo2.write(open);
+  Serial.println("fechou entrega");
+  Serial.println("vamos recomecar!!");
+  Serial.println("");
+  delay(10000);
+
+
 }
 
 void detectaCor(){
