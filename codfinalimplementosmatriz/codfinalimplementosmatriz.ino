@@ -24,6 +24,10 @@
 //servo2=leitura=4
 //servo3=escorregador=7
 
+int red[3][2] = {{54,90},
+                {115,135},
+                {120,135}};
+
 void detectaCor();
 
 int pulseR = 0,
@@ -71,26 +75,29 @@ void setup() {
 
 }
 
+void define_cor(cor){
+  Serial.print(cor);
+}
+
 void loop() {
   
   int i1=0,
       i2=0;
 
-  servo2.slowmove(close,100);
-  delay(500);
-  servo1.slowmove(close,100);
+  servo1.slowmove(close,50);
+  servo2.slowmove(close,50);
   Serial.println("fechou fila e entrega");
   Serial.println("valor de i1 e i2:");
   Serial.println(i1);
   Serial.println(i2);
-  
+  delay(1000);
 
-  servo1.slowmove(open,100);
+  servo1.slowmove(open,50);
   Serial.println("abriu fila");
   delay(1000);
-  servo1.slowmove(close,100);
+  servo1.slowmove(close,50);
   Serial.println("fechou fila");
-  
+  delay(1000);
 
  while((i1<=5)||(i2<=5)||(cr<=5)||(cy<=5)||(cb<=5)||(cg<=5)||(cw<=5)||(co<=5)){ 
   
@@ -111,8 +118,8 @@ void loop() {
   Serial.println();
 
   if((pulseR > 54) && (pulseR < 90) &&
-    (pulseG > 105) && (pulseG < 150) &&
-    (pulseB > 105) && (pulseB < 150) &&
+    (pulseG > 120) && (pulseG < 135) &&
+    (pulseB > 120) && (pulseB < 135) &&
     (pulseW < 100)){
     cr=cr+1;
     if(cr>=5){
@@ -123,10 +130,10 @@ void loop() {
   
   }
 
-  else if((pulseR > 57) && (pulseR < 80) &&
-    (pulseG > 95) && (pulseG < 115) &&
-    (pulseB > 95) && (pulseB < 115) &&
-    (pulseW < 32)){
+  else if((pulseR > 40) && (pulseR < 68) &&
+    (pulseG > 100 ) && (pulseG < 128) &&
+    (pulseB > 100) && (pulseB < 128) &&
+    (pulseW < 100)){
     cr=cr+1;
     if(cr>=5){
       Serial.println("LARANJA/VERMELHO CLARO");
@@ -135,10 +142,22 @@ void loop() {
     }
   }
 
-  else if((pulseR < 60) &&
-    (pulseG > 85) && (pulseG < 115) &&
-    (pulseB > 85) && (pulseB < 115) &&
-    (pulseW < 35)){
+  else if((pulseR > 60) && (pulseR < 75) &&
+    (pulseG > 84 ) && (pulseG < 99) &&
+    (pulseB > 84) && (pulseB < 99) &&
+    (pulseW < 100)){
+    co=co+1;
+    if(co>=5){
+      Serial.println("ROSA");
+      servo3.slowmove(ao,vse);
+      break;
+    }
+  }
+
+  else if((pulseR < 50) &&
+    (pulseG > 98) && (pulseG < 110) &&
+    (pulseB > 98) && (pulseB < 110) &&
+    (pulseW < 100)){
     cy=cy+1;
     if(cy>=5){
       Serial.println("AMARELO");
@@ -147,10 +166,10 @@ void loop() {
     }
   }
 
-  else if((pulseR>45) && (pulseR<65) && 
-    (pulseG > 90) && (pulseG < 110) &&
-    (pulseB > 90) && (pulseB < 110) &&
-    (pulseW < 35)){
+  else if((pulseR > 39) && (pulseR < 55) &&
+    (pulseG > 62 ) && (pulseG < 100) &&
+    (pulseB > 62) && (pulseB < 100) &&
+    (pulseW < 100)){
     cy=cy+1;
     if(cy>=5){
       Serial.println("AMARELO CLARO");
@@ -159,9 +178,9 @@ void loop() {
     }
   }
 
-  else if((pulseR > 125) && (pulseR < 160) &&
-    (pulseG > 55) && (pulseG < 90) &&
-    (pulseB > 55) && (pulseB < 90) &&
+  else if((pulseR > 125) && (pulseR < 150) &&
+    (pulseG > 52) && (pulseG < 65) &&
+    (pulseB > 52) && (pulseB < 65) &&
     (pulseW < 100)){
     cb=cb+1;
     if(cb>=5){
@@ -170,19 +189,6 @@ void loop() {
       break;
     }
   }
-
-  else if((pulseR > 148) && (pulseR < 180) &&
-    (pulseG > 100) && (pulseG < 126) &&
-    (pulseB > 100) && (pulseB < 126) &&
-    (pulseW < 100)){
-    cb=cb+1;
-    if(cb>=5){
-      Serial.println("AZUL ESCURO2");//VAI CONFLITAR COM VERDE
-      servo3.slowmove(ab,vse);
-      break;
-    }
-  }
-
 
   else if((pulseR > 140) && (pulseR < 170) &&
     (pulseG > 95) && (pulseG < 108) &&
@@ -220,9 +226,9 @@ void loop() {
     }
   }
 
-  else if((pulseR > 70) && (pulseR < 100) &&
-    (pulseG > 90) && (pulseG < 120) &&
-    (pulseB > 90) && (pulseB < 120) &&
+  else if((pulseR > 100) && (pulseR < 120) &&
+    (pulseG > 110 ) && (pulseG < 135 ) &&
+    (pulseB > 110) && (pulseB < 135 ) &&
     (pulseW < 100)){
     cg=cg+1;
     if(cg>=5){
@@ -232,9 +238,9 @@ void loop() {
     }
   }
 
-  else if((pulseR > 99) && (pulseR < 130) &&
-    (pulseG > 99) && (pulseG < 130) &&
-    (pulseB > 99) && (pulseB < 130) &&
+  else if((pulseR > 130) && (pulseR < 170) &&
+    (pulseG > 110 ) && (pulseG < 142) &&
+    (pulseB > 110) && (pulseB < 142) &&
     (pulseW < 100)){
     cg=cg+1;
     if(cg>=5){
@@ -244,34 +250,10 @@ void loop() {
     }
   }
 
-  else if((pulseR > 125) && (pulseR < 150) &&
-    (pulseG > 109) && (pulseG < 130) &&
-    (pulseB > 109) && (pulseB < 130) &&
-    (pulseW > 33)){
-    cg=cg+1;
-    if(cg>=5){
-      Serial.println("VERDE ESCURO2");
-      servo3.slowmove(ag,vse);
-      break;
-    }
-  }
-
-  else if((pulseR > 70) && (pulseR < 90) &&
-    (pulseG > 80) && (pulseG < 98) &&
-    (pulseB > 80) && (pulseB < 98) &&
+  else if((pulseR < 50) &&
+    (pulseG < 50) &&
+    (pulseB < 50) &&
     (pulseW < 100)){
-    cg=cg+1;
-    if(cg>=5){
-      Serial.println("VERDE TRANSPARENTE");
-      servo3.slowmove(ag,vse);
-      break;
-    }
-  }
-
-  else if((pulseR < 65) &&
-    (pulseG < 65) &&
-    (pulseB < 65) &&
-    (pulseW < 40)){
     cw=cw+1;
     if(cw>=5){
       Serial.println("BRANCO");
@@ -279,6 +261,19 @@ void loop() {
       break;
     }
   } 
+
+  //leitura de cor roxa
+  else if((pulseR > 115) && (pulseR < 130) &&
+    (pulseG > 102) && (pulseG < 120) &&
+    (pulseB > 102) && (pulseB < 120) &&
+    (pulseW < 100)){
+    co=co+1;
+    if(co>=5){
+      Serial.println("ROXO");
+      servo3.slowmove(ao,vse);
+      break;
+    }
+  }
 
   //leitura de cor preta
   else if((pulseR > 140) &&
@@ -292,6 +287,21 @@ void loop() {
       break;
     }
   }
+
+  //leitura se a fila está vazia
+  //else if((pulseR > 80) && (pulseR<90) &&
+  //  (pulseG > 99) && (pulseG<105) &&
+  //  (pulseB > 99) && (pulseB<105) &&
+  //  (pulseW < 50)){
+  //  Serial.println("Fila de leitura vazia...");
+  //  i1=i1+1;
+  //  Serial.println("valor de i1:");
+  //  Serial.println(i1);
+  //  if(i1>=5){
+  //    break;
+  //  }
+  //  delay(1000);
+  //}
     
   //verificação se a cor está ou nao cadastrada  
   else{
@@ -313,7 +323,7 @@ void loop() {
   }
   delay(300);
  }
-  delay(1000);
+  delay(6000);
   cr=0,
   cy=0,
   cb=0,
@@ -322,14 +332,15 @@ void loop() {
   co=0;
 
   Serial.println();
+  delay(1000);
   Serial.println("encerrou checagem");
   Serial.println("vamos dar sequencia");
   Serial.println("");
 
 
-  servo2.slowmove(open,100);
+  servo2.slowmove(open,50);
   Serial.println("abriu entrega");
-  delay(2000);
+  delay(3000);
   
   Serial.println("fechou entrega");
   Serial.println("vamos recomecar!!");

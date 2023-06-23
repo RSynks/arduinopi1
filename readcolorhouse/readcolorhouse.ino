@@ -103,8 +103,8 @@ void loop() {
   }
 
   else if((pulseR > 39) && (pulseR < 55) &&
-    (pulseG > 62 ) && (pulseG < 75 ) &&
-    (pulseB > 62) && (pulseB < 75 ) &&
+    (pulseG > 62 ) && (pulseG < 100) &&
+    (pulseB > 62) && (pulseB < 100) &&
     (pulseW < 100)){
     Serial.println("AMARELO CLARO");
     servo3.write(30);
@@ -166,18 +166,18 @@ void loop() {
     servo3.write(180);
   }
 
-  else if((pulseR > 150) && (pulseR < 183) &&
-    (pulseG > 130 ) && (pulseG < 160) &&
-    (pulseB > 130) && (pulseB < 160) &&
+  else if((pulseR > 129) && (pulseR < 155) &&
+    (pulseG > 129 ) && (pulseG < 155) &&
+    (pulseB > 129) && (pulseB < 155) &&
     (pulseW < 100)){
     Serial.println("PRETO");
     servo3.write(180);
   }
 
-  else if((pulseR > 170) &&
-    (pulseG > 150) &&
-    (pulseB > 150) &&
-    (pulseW < 100)){
+  else if((pulseR > 80) && (pulseR<90)&&
+    (pulseG > 99) && (pulseG<105) &&
+    (pulseB > 99) && (pulseB<105) &&
+    (pulseW < 50)){
     Serial.println("Fila de leitura vazia...");
     i=i+1
   }
